@@ -1,0 +1,170 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Member {
+    id       String  @id @default(cuid())
+    name     String
+    phone    String  @unique // Optional for admins
+    username String? @unique // Optional for members
+    password String
+    role     Role    @default(MEMBER)
+
+    // Relations (only applicable for members/leaders)
+    registrations       EventRegistration[]
+    sundayTreats        SundayTreat[]
+    leaderSchedules     LeaderSchedule[]    @relation("leader")
+    substituteSchedules LeaderSchedule[]    @relation("substitute")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Constraints
+    @@index([role])
+}
+
+model Event {
+    id          String    @id @default(cuid())
+    title       String
+    description String
+    eventType   EventType
+    date        DateTime
+    location    String
+
+    // Relations
+    registrations EventRegistration[]
+    media         Media[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model EventRegistration {
+    id       String  @id @default(cuid())
+    eventId  String
+    memberId String?
+
+    guestName  String?
+    guestPhone String?
+
+    event  Event   @relation(fields: [eventId], references: [id])
+    member Member? @relation(fields: [memberId], references: [id])
+
+    registeredAt DateTime @default(now())
+
+    @@unique([eventId, memberId])
+    @@unique([eventId, guestPhone])
+}
+
+model Media {
+    id           String        @id @default(cuid())
+    type         MediaType
+    platform     MediaPlatform
+    url          String
+    thumbnailUrl String?
+    title        String
+    description  String?
+
+    // Relations
+    eventId String?
+    event   Event?  @relation(fields: [eventId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model SundayTreat {
+    id           String   @id @default(cuid())
+    hostMemberId String
+    proposedDate DateTime
+    location     String?
+
+    status     TreatStatus @default(PROPOSED)
+    approvedAt DateTime?
+
+    // Relations
+    hostMember Member @relation(fields: [hostMemberId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Notification {
+    id        String           @id @default(cuid())
+    title     String
+    message   String
+    type      NotificationType
+    createdAt DateTime         @default(now())
+    updatedAt DateTime         @updatedAt
+}
+
+model LeaderSchedule {
+    id            String   @id @default(cuid())
+    leaderId      String
+    scheduledDate DateTime
+
+    didAttend Boolean?
+
+    // Substitute
+    substituteId     String?
+    substituteReason String?
+
+    // Relations
+    leader    Member  @relation("leader", fields: [leaderId], references: [id])
+    substitue Member? @relation("substitute", fields: [substituteId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@unique([leaderId, scheduledDate])
+}
+
+enum Role {
+    MEMBER
+    ADMIN
+    LEADER
+    SUPER_ADMIN
+}
+
+enum EventType {
+    REGULAR_DAY
+    SPECIAL_PROGRAM
+    SUNDAY_PROGRAM
+    CELEBRATION
+    GUEST_SESSION
+    INDEPENDENCE_DAY
+    ONAM
+    REPUBLIC_DAY
+    OTHER
+}
+
+enum MediaType {
+    VIDEO
+    PHOTO
+}
+
+enum MediaPlatform {
+    YOUTUBE
+    FACEBOOK
+}
+
+enum TreatStatus {
+    PROPOSED
+    APPROVED
+    COMPLETED
+    CANCELLED
+}
+
+enum NotificationType {
+    GENERAL
+    EVENT
+    CELEBRATION
+    REMINDER
+    EMERGENCY
+    IMPORTANT
+}
