@@ -1,16 +1,11 @@
 import { Hono } from "hono";
-import { PrismaClient } from "@prisma/client/edge";
-import { AuthService } from "../services/auth.service";
-import { authMiddleware } from "../middlewares/auth";
+import { AuthService } from "../../services/auth.service";
+
+import { AppBindings, AppVariables } from "../../types/types";
 
 const authRoutes = new Hono<{
-  Variables: {
-    prisma: PrismaClient,
-    userId: string
-  },
-  Bindings: {
-    JWT_SECRET: string
-  }
+  Bindings: AppBindings;
+  Variables: AppVariables;
 }>();
 
 // public registration (for members only)

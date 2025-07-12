@@ -7,7 +7,7 @@
   //   "nodejs_compat"
   // ],
    "vars": {
-     "jwt_secret": "bbc123#"
+     "JWT_SECRET": "bbc123#"
    },
   // "kv_namespaces": [
   //   {

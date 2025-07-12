@@ -21,8 +21,9 @@ model Member {
     leaderSchedules     LeaderSchedule[]    @relation("leader")
     substituteSchedules LeaderSchedule[]    @relation("substitute")
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+    notificationReads NotificationRead[]
 
     // Constraints
     @@index([role])
@@ -95,12 +96,32 @@ model SundayTreat {
 }
 
 model Notification {
-    id        String           @id @default(cuid())
-    title     String
-    message   String
-    type      NotificationType
-    createdAt DateTime         @default(now())
-    updatedAt DateTime         @updatedAt
+    id      String           @id @default(cuid())
+    title   String
+    message String
+    type    NotificationType
+
+    // Target Audience
+    targetAll     Boolean  @default(true)
+    targetMembers String[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    readStatuses NotificationRead[]
+}
+
+model NotificationRead {
+    id             String   @id @default(cuid())
+    notificationId String
+    memberId       String
+    readAt         DateTime @default(now())
+
+    notification Notification @relation(fields: [notificationId], references: [id])
+    member       Member       @relation(fields: [memberId], references: [id])
+
+    @@unique([notificationId, memberId])
 }
 
 model LeaderSchedule {

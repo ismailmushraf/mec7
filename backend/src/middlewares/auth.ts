@@ -5,7 +5,7 @@ import { Role } from "@prisma/client";
 export const authMiddleware = async (c: Context, next: Next) => {
   try {
     const authHeader = c.req.header('Authorization')
-    if (!authHeader || authHeader.startsWith('Bearer')) {
+    if (!authHeader || !authHeader.startsWith('Bearer')) {
       return c.json({ success: false, error: 'No token provided' }, 401)
     }
 
