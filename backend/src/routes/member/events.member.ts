@@ -9,7 +9,8 @@ const memberEventRoutes = new Hono<{
   Variables: AppVariables;
 }>();
 
-memberEventRoutes.use('/*', authMiddleware); 
+// not necessary to use auth here since we need to show them publicly
+//memberEventRoutes.use('/*', authMiddleware); 
 
 memberEventRoutes.get('/', async(c) => {
   try {
