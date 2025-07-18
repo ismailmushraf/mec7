@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { hashPassword, verifyPassword, createToken } from "../utils/auth";
-import { AuthResponse } from "../types/types";
+import { AuthResponse } from "@ismailmushraf/mec7";
 
 export class AuthService {
   constructor(private prisma: PrismaClient, private jwtSecret: string) {}

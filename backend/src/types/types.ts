@@ -1,15 +1,5 @@
 import { PrismaClient, Role, EventType, Event, TreatStatus, NotificationType } from "@prisma/client/edge";
 
-export interface AuthResponse {
-  user: {
-    id: string;
-    name: string;
-    phone?: string
-    username?: string;
-    role: Role;
-  };
-  token: string;
-}
 
 export interface EventResponse {
   id: string;

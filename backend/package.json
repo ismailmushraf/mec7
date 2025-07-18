@@ -9,6 +9,7 @@
     "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@ismailmushraf/mec7": "^1.0.10",
     "@prisma/client": "^6.11.1",
     "@prisma/extension-accelerate": "^2.0.2",
     "hono": "^4.8.4"

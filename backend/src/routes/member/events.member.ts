@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { AppBindings, AppVariables } from "../../types/types";
-import { authMiddleware } from "../../middlewares/auth";
 import EventService from "../../services/event.service";
 import { AppError } from "../../utils/errors";
 

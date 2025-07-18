@@ -1,44 +1,69 @@
 import type { RouteObject } from 'react-router-dom';
+import Mec7Routine from './pages/Mec7Routine';
+import Home from './pages/Home';
+import AboutPage from './pages/About';
+import ViewAllEventsPage from './pages/Event';
+import EventsShowcasePage from './pages/EventsShowcasePage';
+import EventDetailPage from './pages/ViewEventPage';
+import HostSundayTreatPage from './pages/HostSundayTreatPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import MembersPage from './pages/Members';
+import ProfilePage from './pages/ProfilePage';
+import EditProfilePage from './pages/EditProfile';
+import NotFoundPage from './pages/NotFoundPage';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <div>Home Page</div>,
+    element: <Home />
   },
   {
     path: '/mec7-workout',
-    element: <div>Routine page</div>
+    element: <Mec7Routine />
   },
   {
     path: '/about',
-    element: <div>About Page</div>,
-  },
-  {
-    path: '/members',
-    element: <div>Members Page</div>,
+    element: <AboutPage />,
   },
   {
     path: '/be-a-host',
-    element: <div>Be a Host Page</div>,
+    element: <HostSundayTreatPage />,
   },
   {
     path: '/events/register',
-    element: <div>Event Register Page</div>,
+    element: <ViewAllEventsPage />,
   },
   {
     path: '/events/gallery',
-    element: <div>Event Gallery Page</div>,
+    element: <EventsShowcasePage />
+  },
+  {
+    path: '/events/showcase/:id',
+    element: <EventDetailPage />
   },
   {
     path: '/profile',
-    element: <div>Profile Page</div>,
+    element: <ProfilePage />
+  },
+  {
+    path: '/profile/edit',
+    element: <EditProfilePage />
+  },
+  {
+    path: '/members',
+    element: <MembersPage />
   },
   {
     path: '/login',
-    element: <div>Login Page</div>,
+    element: <LoginPage />,
+  },
+  {
+    path: '/register',
+    element: <SignupPage />,
   },
   {
     path: '*',
-    element: <div>404 - Page Not Found</div>,
+    element: <NotFoundPage />
   },
 ];

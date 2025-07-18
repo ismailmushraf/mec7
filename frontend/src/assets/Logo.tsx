@@ -17,6 +17,19 @@ const Logo: React.FC<{ className?: string }> = ({ className = "h-12" }) => {
                 style={{ top: '-2px', left: '18px' }}
               ></div>
               {/* Swoosh - parallel line forming the other side of body */}
+              {/* <div 
+                className="absolute" 
+                style={{
+                  top: '7px',
+                  left: '26.5px',
+                  transform: 'rotate(53deg) scaleX(-1)',
+                  transformOrigin: 'top',
+                  borderRadius: '2px',
+                  fontSize: '30px',
+                  fontWeight: 'bold',
+                  color: '#15B1F1'
+                }}
+                >7</div> */}
               <div 
                 className="absolute w-1 bg-[#15B1F1]" 
                 style={{
@@ -38,7 +51,7 @@ const Logo: React.FC<{ className?: string }> = ({ className = "h-12" }) => {
                   transformOrigin: 'top',
                   borderRadius: '2px'
                 }}
-              ></div>
+                ></div>
             </div>
           </div>
         </div>

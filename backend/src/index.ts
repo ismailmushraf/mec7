@@ -19,7 +19,11 @@ const app = new Hono<{
 }>()
 
 // Initialize Prisma with Accelerate
-app.use('/api/*', cors())
+app.use('/api/*', cors({
+  origin: '*', // or restrict to specific domains
+  allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization']
+}))
 
 app.use(async (c, next) => {
   const prisma = new PrismaClient({

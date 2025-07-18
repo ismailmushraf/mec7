@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client/edge";
-import { AuthResponse } from "../types/types";
 import { createToken, hashPassword } from "../utils/auth";
 import { AppError } from "../utils/errors";
 

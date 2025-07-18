@@ -44,9 +44,6 @@ const Header: React.FC = () => {
             <a href="/mec7-workout" className="text-gray-700 hover:text-[#15B1F1] transition-all duration-200 font-medium hover:scale-105 transform">
               Practice Mec7
             </a>
-            <a href="/be-a-host" className="text-gray-700 hover:text-[#15B1F1] transition-all duration-200 font-medium hover:scale-105 transform">
-              Be a Host
-            </a>
             
             {/* Events Dropdown */}
             <div className="relative" ref={eventsRef}>
@@ -92,6 +89,9 @@ const Header: React.FC = () => {
             }`}>
               <a href="/profile" className="block px-4 py-3 text-sm text-gray-700 hover:bg-[#15B1F1]/10 hover:text-[#15B1F1] transition-colors duration-150">
                 Profile
+              </a>
+              <a href="/be-a-host" className="block px-4 py-3 text-sm text-gray-700 hover:bg-[#15B1F1]/10 hover:text-[#15B1F1] transition-colors duration-150">
+                Be a Host
               </a>
               <a href="/login" className="block px-4 py-3 text-sm text-gray-700 hover:bg-[#15B1F1]/10 hover:text-[#15B1F1] transition-colors duration-150">
                 Login/Logout
